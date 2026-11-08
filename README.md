@@ -1,5 +1,7 @@
 # Network Reconnaissance Report Analyzer
 
+**Start here:** [Technical case study](docs/CASE-STUDY.md) · [Cloud verification](docs/VALIDATION.md) · [Reproducible demonstration](docs/DEMO-EVIDENCE.md)
+
 **Type:** Offline analysis of synthetic Nmap XML. No scanning is performed by this code.
 
 ## Purpose

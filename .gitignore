@@ -5,4 +5,4 @@ __pycache__/
 .DS_Store
 .env
 inventory-report.md
-authorized_lab.xml
+/authorized_lab.xml

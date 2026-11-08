@@ -39,6 +39,20 @@ class PcapTests(unittest.TestCase):
         frame = bytes.fromhex("00112233445566778899aabb86dd") + b"\x00" * 30
         self.assertEqual(decode_packet(frame)["protocol"], "NON_IPV4")
 
+    def test_bad_ipv4_total_length_not_counted_as_valid(self):
+        from generate_sample_pcap import ipv4_packet
+        frame = bytearray(ipv4_packet("192.0.2.1", "198.51.100.1", 6, 5000, 443))
+        frame[16:18] = (900).to_bytes(2, "big")  # IP total length exceeds captured bytes.
+        self.assertEqual(decode_packet(bytes(frame))["protocol"], "MALFORMED_IPV4")
+
+    def test_ethernet_padding_not_mistaken_for_transport_port(self):
+        from generate_sample_pcap import ipv4_packet
+        frame = bytearray(ipv4_packet("192.0.2.1", "198.51.100.1", 6, 5000, 443))
+        frame[16:18] = (20).to_bytes(2, "big")  # Header-only IP datagram.
+        row = decode_packet(bytes(frame))
+        self.assertEqual(row["protocol"], "TCP")
+        self.assertNotIn("destination_port", row)
+
 
 if __name__ == "__main__":
     unittest.main()

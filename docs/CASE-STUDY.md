@@ -6,7 +6,7 @@ Raw service-discovery output can be difficult to summarize for review. Analysts 
 
 ## Approach
 
-The parser reads an existing Nmap XML file, collects open TCP services, and attaches review notes for selected legacy protocols. It produces console, JSON, and Markdown output; it never initiates its own network scan.
+One parser reads existing Nmap XML to inventory open services and review selected legacy protocols. A separate classic-PCAP parser summarizes Ethernet/IPv4 protocol counts, source IPs, destination ports, and flows. Both are fully offline and initiate no scanning or capture.
 
 ## Architecture
 
@@ -21,8 +21,8 @@ The parser reads an existing Nmap XML file, collects open TCP services, and atta
 
 ## Demonstrated outcome
 
-Three tests passed and two synthetic hosts were summarized in cloud verification. The illustrative Telnet exposure is only an inventory finding. No third-party system or packet data was examined.
+Ten Python tests passed in the latest cloud verification. Two fictional hosts appear in the XML fixture; a second generated fixture contains three fake packets. The code rejects malformed IPv4 total lengths and ignores Ethernet padding when identifying ports. The illustrative Telnet exposure is an inventory review item, not a confirmed vulnerability.
 
 ## Next personal contribution
 
-Alexander can add protocol grouping, port-count summaries, or an authorized Wireshark metadata case study with redacted evidence.
+Alexander can independently add an ICMP synthetic fixture and explain exactly how its protocol counts differ. He should only use owned/authorized captures and never publish private packet data.

@@ -14,6 +14,22 @@ python analyze_nmap.py samples/authorized_lab.xml --markdown inventory-report.md
 python -m unittest discover -s tests -v
 ```
 
+## Expanded offline packet analysis
+
+`pcap_workbench.py` adds a **classic PCAP** reader for Ethernet / IPv4 traffic, identifying TCP, UDP, and ICMP, top source addresses, destination ports, and simple flow summaries. It parses existing captures; it does **not** scan or sniff the network. Unsupported formats (including PCAPNG) must be converted with an authorized tool or analyzed separately.
+
+Create a three-packet fictional fixture and analyze it:
+
+```bash
+python generate_sample_pcap.py synthetic.pcap
+python pcap_workbench.py synthetic.pcap
+python pcap_workbench.py synthetic.pcap --format json --output packet-report.json
+python pcap_workbench.py synthetic.pcap --format markdown --output packet-report.md
+python -m unittest discover -s tests -v
+```
+
+This expansion adds five tests for protocol classification, ports, flow summaries, markdown output, and invalid capture headers; eight Python tests now cover both tools. The generator uses documentation-only addresses and writes no real traffic. Never commit live network captures containing personal or organizational information.
+
 ## Sample findings
 
 The **fictional** example contains a host with TCP ports 22 (SSH), 80 (HTTP), and 23 (Telnet) open. The analyzer recommends reviewing whether Telnet is necessary and enforcing encrypted remote administration. Another host exposes TCP 443 (HTTPS). These are hypothetical inventory observations, not real scanned machines.
@@ -56,10 +72,3 @@ Do not publish IP addresses, hostnames, banners, or service versions from a real
 - [ ] Explain difference between open service and confirmed vulnerability
 - [ ] Optionally capture permissioned local-lab Nmap results and redact them
 - [ ] Add sanitized Wireshark protocol analysis as future enhancement
-
-## Portfolio evidence and technical review
-
-- [Cloud validation report](docs/VALIDATION.md) — dated test results and limitations
-- [Technical case study](docs/CASE-STUDY.md) — problem, approach, engineering decisions, and next personal contribution
-
-The cloud run was AI-assisted; it does not establish Alexander's independent authorship. GitHub Actions may be unavailable due to an account-level billing restriction. Follow the local commands in the validation report to reproduce results.

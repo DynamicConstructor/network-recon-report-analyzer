@@ -1,5 +1,7 @@
 # Cloud Validation — November 8, 2026
 
+> **Current: 10/10 Python tests passed.** Earlier counts below are historical checkpoints. The PCAP fixture is synthetic.
+
 **Execution:** ChatGPT-managed Linux environment, Python 3.12.14. AI-assisted cloud test run.
 
 ## Reproduce

@@ -28,7 +28,7 @@ python pcap_workbench.py synthetic.pcap --format markdown --output packet-report
 python -m unittest discover -s tests -v
 ```
 
-This expansion adds five tests for protocol classification, ports, flow summaries, markdown output, and invalid capture headers; eight Python tests now cover both tools. The generator uses documentation-only addresses and writes no real traffic. Never commit live network captures containing personal or organizational information.
+This expansion adds seven tests for protocol classification, ports, flow summaries, markdown output, invalid capture headers, malformed IPv4 lengths, and avoiding false ports from Ethernet padding; ten Python tests now cover both tools. The generator uses documentation-only addresses and writes no real traffic. Never commit live network captures containing personal or organizational information.
 
 ## Sample findings
 

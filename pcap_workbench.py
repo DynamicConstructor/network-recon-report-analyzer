@@ -52,6 +52,10 @@ def decode_packet(packet):
     header_bytes = (data[0] & 0x0f) * 4
     if header_bytes < 20 or len(data) < header_bytes:
         return {"protocol": "MALFORMED_IPV4"}
+    declared_length = struct.unpack("!H", data[2:4])[0]
+    if declared_length < header_bytes or declared_length > len(data):
+        return {"protocol": "MALFORMED_IPV4"}
+    data = data[:declared_length]  # Ignore Ethernet padding beyond IP payload.
     proto = data[9]
     source = socket.inet_ntoa(data[12:16])
     destination = socket.inet_ntoa(data[16:20])

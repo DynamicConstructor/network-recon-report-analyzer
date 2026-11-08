@@ -56,3 +56,10 @@ Do not publish IP addresses, hostnames, banners, or service versions from a real
 - [ ] Explain difference between open service and confirmed vulnerability
 - [ ] Optionally capture permissioned local-lab Nmap results and redact them
 - [ ] Add sanitized Wireshark protocol analysis as future enhancement
+
+## Portfolio evidence and technical review
+
+- [Cloud validation report](docs/VALIDATION.md) — dated test results and limitations
+- [Technical case study](docs/CASE-STUDY.md) — problem, approach, engineering decisions, and next personal contribution
+
+The cloud run was AI-assisted; it does not establish Alexander's independent authorship. GitHub Actions may be unavailable due to an account-level billing restriction. Follow the local commands in the validation report to reproduce results.
